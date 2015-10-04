@@ -33,7 +33,7 @@ class PandocReader(BaseReader):
                                 stdin = subprocess.PIPE,
                                 stdout = subprocess.PIPE)
 
-        output = proc.communicate(content.encode('utf-8'))[0].decode('utf-8')
+        output = proc.communicate(content.encode('utf-8'))[0].decode('utf-8').replace('\r', '')
         status = proc.wait()
         if status:
             raise subprocess.CalledProcessError(status, pandoc_cmd)
